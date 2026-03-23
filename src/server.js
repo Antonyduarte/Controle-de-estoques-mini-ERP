@@ -1,6 +1,6 @@
 const dotenv = require("dotenv")
 const express = require("express")
-const middlewares = require("./middlewares/middlewares")
+const middlewares = require("./middlewares/authMiddleware")
 dotenv.config()
 
 const app = express()

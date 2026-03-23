@@ -1,9 +1,11 @@
-function response(status, message, affectedRows) {
-    return {
-        status: status,
-        message: message,
-        affectedRows: affectedRows,
-        timeStamp: new Date().getTime()
+class apiRes{
+    constructor(status, message, affectedRows, data) {
+        this.status = status,
+        this.message = message,
+        this.affectedRows = affectedRows
+        this.data = data
     }
 }
-module.exports = { response }
+
+
+module.exports = { apiRes }
