@@ -9,12 +9,18 @@ async function register(username, email, password) {
     const emailExists = await authRepository.findByEmail(email)
     
     if(emailExists) {
-        throw new Error("Este email já está sendo utilizado por outro usuário")
+        throw new Error("EMAIL_ALREADY_EXISTS")
     }
+    const userExists = await authRepository.findByUsername(username)
+
+    if (userExists) {
+        throw new Error("USER_ALREADY_EXISTS")
+    }
+
     // hasheia a senha enviada pelo usuário.
     const hashedPass = await bcrypt.hash(password, 10)
 
-    const user = await authRepository.userRegister(username, email, password)
+    const user = await authRepository.userRegister(username, email, hashedPass)
 
     return{
         id: user.id,
@@ -22,7 +28,7 @@ async function register(username, email, password) {
         emai: user.email
     }
 }
- 
+
 // async function login(email, password) {
     
 // }

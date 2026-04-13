@@ -5,23 +5,34 @@ async function register(req, res) {
     try {
         const { username, email, password } = req.body
         if (!username || username.trim() === "") {
-            return res.status(400).json(apiResponse.apiRes("Erro", "Preencha o campo de username"))
+            return res.status(400).json(apiResponse.apiRes("Erro", "Preencha o nome de usuário"))
         }
         if (!email || email.trim() === "") {
-            return res.status(400).json(apiResponse.apiRes("Erro", "Preencha o campo de email"))
+            return res.status(400).json(apiResponse.apiRes("Erro", "Preencha o e-mail"))
         }
         if (!password || password.trim() === "") {
-            return res.status(400).json(apiResponse.apiRes("Erro", "Preencha o campo de password"))
+            return res.status(400).json(apiResponse.apiRes("Erro", "Preencha a senha"))
         }
 
-        const newUser = await authSerivce.register({ username, email, password })
+        const newUser = await authSerivce.register(username, email, password)
 
         return res.status(201).json(apiResponse.apiRes("Sucesso", "Conta registrada com êxito"))
+
     } catch (error) {
-        throw new Error
+        if (error.message === "EMAIL_ALREADY_EXISTS" || error.message === "USER_ALREADY_EXISTS") {
+            return res.status(400).json(apiResponse.apiRes(
+                "Erro",
+                "Email ou usuário já em uso"
+            ))
+        } else {
+            return res.status(500).json(apiResponse.apiRes(
+                "Erro",
+                "Erro interno",
+                0,
+                null
+            ))
+        }
     }
 }
-
-
 
 module.exports = { register }
