@@ -1,4 +1,3 @@
-const express = require("express")
 const apiResponse = require("../../utils/apiResponse")
 
 function registerVerify(req, res, next) {
@@ -23,6 +22,5 @@ function registerVerify(req, res, next) {
         ))
     }
 }
- 
 
 module.exports = { registerVerify }

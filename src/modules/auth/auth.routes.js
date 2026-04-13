@@ -1,10 +1,8 @@
-const Router = require("express").Router()
+const express = require("express")
+const router = express.Router()
 const authController = require("./auth.controller")
-const authRepository = require("./auth.repository")
 const validator = require("./auth.validation")
 
-Router.post("/register", validator.registerVerify, authController) 
+router.post("/register", authController.register)
 
-Router.post("login", )
-
-module.exports = { Router }
+module.exports = router
