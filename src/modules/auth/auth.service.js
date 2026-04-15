@@ -1,7 +1,6 @@
 const authRepository = require("./auth.repository")
 const authToken = require("../../middlewares/authMiddleware")
 const bcrypt = require("bcrypt")
-const jwt = require("jsonwebtoken")
 
 
 async function register(username, email, password) {

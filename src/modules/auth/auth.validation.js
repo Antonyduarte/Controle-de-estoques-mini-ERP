@@ -1,26 +1,27 @@
 const apiResponse = require("../../utils/apiResponse")
 
 function registerVerify(req, res, next) {
-    const { user, email, password } = req.body
+    const { username, email, password } = req.body
 
-    if (!user) {
-        return res.status(400).json(apiResponse.response(
-            "Error",
+    if (!username || username.trim() === "") {
+        return res.status(400).json(apiResponse.apiRes(
+            "Erro",
             "Usuário é obrigatório"
         ))
     }
-    if (!email) {
-        return res.status(400).json(apiResponse.response(
-            "Error",
+    if (!email || email.trim() === "") {
+        return res.status(400).json(apiResponse.apiRes(
+            "Erro",
             "Email é obrigatório"
         ))
     }
-    if (!password) {
-        return res.status(400).json(apiResponse.response(
-            "Error",
+    if (!password || password.trim() === "") {
+        return res.status(400).json(apiResponse.apiRes(
+            "Erro",
             "Senha é obrigatória"
         ))
     }
+    return next()
 }
 
 module.exports = { registerVerify }

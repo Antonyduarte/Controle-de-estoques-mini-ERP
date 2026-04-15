@@ -1,0 +1,8 @@
+CREATE TABLE `inventory` (
+	`id` INT NULL DEFAULT NULL,
+	`product_id` INT NULL DEFAULT NULL,
+	`quantity` INT NULL DEFAULT NULL,
+	`updated_at` INT NULL DEFAULT NULL
+)
+COLLATE='utf8mb4_0900_ai_ci'
+ENGINE=InnoDB
